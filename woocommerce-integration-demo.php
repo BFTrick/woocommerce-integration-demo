@@ -69,11 +69,13 @@ class WC_Integration_Demo {
 
 
 	/**
-	 * Add a new integration to WooCommerce.
+	 * Generate Text Input HTML.
 	 *
-	 * @param  array $integrations WooCommerce integrations.
-	 *
-	 * @return array
+	 * @access public
+	 * @param mixed $key
+	 * @param mixed $data
+	 * @since 1.0.0
+	 * @return string
 	 */
 	public function add_integration( $integrations ) {
 		$integrations[] = 'WC_Integration_Demo_Integration';
