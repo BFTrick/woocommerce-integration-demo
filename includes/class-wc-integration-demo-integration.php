@@ -71,12 +71,6 @@ class WC_Integration_Demo_Integration extends WC_Integration {
 
 	/**
 	 * Generate Button HTML.
-	 *
-	 * @access public
-	 * @param mixed $key
-	 * @param mixed $data
-	 * @since 1.0.0
-	 * @return string
 	 */
 	public function generate_button_html( $key, $data ) {
 		$field    = $this->plugin_id . $this->id . '_' . $key;
