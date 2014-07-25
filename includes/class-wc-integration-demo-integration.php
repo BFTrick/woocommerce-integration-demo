@@ -32,6 +32,9 @@ class WC_Integration_Demo_Integration extends WC_Integration {
 		// Actions.
 		add_action( 'woocommerce_update_options_integration_' .  $this->id, array( $this, 'process_admin_options' ) );
 
+		// Filters.
+		add_filter( 'woocommerce_settings_api_sanitized_fields_' . $this->id, array( $this, 'sanitize_settings' ) );
+
 	}
 
 
@@ -102,6 +105,19 @@ class WC_Integration_Demo_Integration extends WC_Integration {
 		</tr>
 		<?php
 		return ob_get_clean();
+	}
+
+
+	/**
+	 * Santize our settings
+	 */
+	public function sanitize_settings( $settings ) {
+		// We're just going to make the api key all upper case characters since that's how our imaginary API works
+		if ( isset( $settings ) &&
+		     isset( $settings['api_key'] ) ) {
+			$settings['api_key'] = strtoupper( $settings['api_key'] );
+		}
+		return $settings;
 	}
 
 }
