@@ -110,6 +110,7 @@ class WC_Integration_Demo_Integration extends WC_Integration {
 
 	/**
 	 * Santize our settings
+	 * @see process_admin_options()
 	 */
 	public function sanitize_settings( $settings ) {
 		// We're just going to make the api key all upper case characters since that's how our imaginary API works
@@ -119,6 +120,41 @@ class WC_Integration_Demo_Integration extends WC_Integration {
 		}
 		return $settings;
 	}
+
+
+	/**
+	 * Validate the API key
+	 * @see validate_settings_fields()
+	 */
+	public function validate_api_key_field( $key ) {
+		// get the posted value
+		$value = $_POST[ $this->plugin_id . $this->id . '_' . $key ];
+
+		// check if the API key is longer than 20 characters. Our imaginary API doesn't create keys that large so something must be wrong. Throw an error which will prevent the user from saving.
+		if ( isset( $value ) &&
+			 20 < strlen( $value ) ) {
+			$this->errors[] = $key;
+		}
+		return $value;
+	}
+
+
+	/**
+	 * Display errors by overriding the display_errors() method
+	 * @see display_errors()
+	 */
+	public function display_errors( ) {
+
+		// loop through each error and display it
+		foreach ( $this->errors as $key => $value ) {
+			?>
+			<div class="error">
+				<p><?php _e( 'Looks like you made a mistake with the ' . $value . ' field. Make sure it isn&apos;t longer than 20 characters', 'woocommerce-integration-demo' ); ?></p>
+			</div>
+			<?php
+		}
+	}
+
 
 }
 
