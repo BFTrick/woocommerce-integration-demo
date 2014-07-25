@@ -36,10 +36,10 @@ class WC_Integration_Demo_Integration extends WC_Integration {
 
 
 	/**
-	* Initialize integration settings form fields.
-	*
-	* @return void
-	*/
+	 * Initialize integration settings form fields.
+	 *
+	 * @return void
+	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
 			'api_key' => array(
